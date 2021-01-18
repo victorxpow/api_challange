@@ -1,24 +1,19 @@
-# README
+# Desafio - Sistema de Contas bancárias
+Projeto realizado com base no desafio proposto, foi feito usando Ruby on Rails e banco de dados Mysql.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Como iniciar o projeto
+Para executar esse projeto você deve ter um computador, preferencialmente com Linux, com a linguagem de programação Ruby na versão 2.7.2, e também:
 
-Things you may want to cover:
+- MYSQL
+- Nodejs
+- Yarn
 
-* Ruby version
+Dentro do diretório do projeto, você deve instalar as dependências definidas no arquivo Gemfile com o comando `ruby bin/setup`
 
-* System dependencies
+Com todas dependências instaladas, execute rails server e acesse localhost:3000 em seu navegador.
 
-* Configuration
+Ou pode usar o Docker, bastando ter o Docker e docker-compose instalado
 
-* Database creation
+## Rodando o projeto com docker
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Você só precisa usar o comando `docker-compose up` para levantar o projeto e acesse localhost:3000 em seu navegador.
