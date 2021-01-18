@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :account do
-    name { "MyString" }
-    balance { 1 }
-    account_number { 1 }
-    token { "MyText" }
+    name { Faker::FunnyName.name }
+    balance { Faker::Number.number(digits: 3) }
+    account_number { Faker::Number.number(digits: 10) }
+    token { Faker::Code.asin }
   end
 end
