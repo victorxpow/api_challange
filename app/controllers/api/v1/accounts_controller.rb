@@ -3,11 +3,13 @@ module Api
         class AccountController < ApplicationController
             def transfer
                 account = Account.find(params[:id])
+                return head :not_found unless account
             
-                recipient_param = params.permit(:recipient_id)
-                recipient = Account.find(recipient_param[:recipient_id])
+                destination_account_param = params.permit(:destination_account_id)
+                destination_account = Account.find(destination_account_param[:destination_account_id])
+                return head :not_found unless destination_account
             
-                return head :unprocessable_entity unless Account.transfer(account, recipient, amount)
+                return head :unprocessable_entity unless Account.transfer(account, destination_account, amount)
                 render json: {transfered: true}
               end
             

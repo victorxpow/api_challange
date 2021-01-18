@@ -11,15 +11,15 @@ RSpec.describe Account, type: :model do
   end
 
   describe '#transfer' do
-    let(:params_recipient) { attributes_for(:account)}
-    let!(:recipient) { create(:account, params_recipient) }
+    let(:destination_account_params) { attributes_for(:account)}
+    let!(:destination_account) { create(:account, destination_account_params) }
 
     context 'with valid params' do
       it 'transfer from one account to another account' do
-        transfered = Account.transfer(account, recipient, 10)
+        transfered = Account.transfer(account, destination_account, 10)
         expect(transfered).to eq true
         expect(account.balance).to eq 90
-        expect(recipient.balance).to eq 110
+        expect(destination_account.balance).to eq 110
       end
     end
   end
