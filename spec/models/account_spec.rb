@@ -21,6 +21,18 @@ RSpec.describe Account, type: :model do
         expect(account.balance).to eq 90
       end
     end
-  end
+    
+    context 'validations' do
+      it 'amount must be positive greater than one integer' do
+        transfered = Account.transfer(account, destination_account, -10)
+        expect(transfered).to eq false
+      end
 
+      it 'the balance must be greater than the amount of transaction' do
+        transfered = Account.transfer(account, destination_account, 110)
+        expect(transfered).to eq false
+      end
+    end
+
+  end
 end
