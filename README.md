@@ -24,3 +24,9 @@ Você só precisa usar o comando `docker-compose up` para levantar o projeto e a
 - Shoulda Matchers - facilitar as validações
 - Faker - auxiliar no setup de teste
 - SimpleCov - consigo garantir e acompanhar a cobertura de testes
+
+### Etapas futuras
+
+- Aumentar a cobertura de testes e o numero de cases.
+- Incluir uma forma de authenticação e ou encriptação de dados sensiveis.
+- Alterar a forma que transação é feita, como é um sistema bancario o ideal é verificar o historico de transação e ter mais opções de transações.
