@@ -28,6 +28,26 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
         end
     end
 
+    describe 'POST /api/v1/accounts/transfer' do
+        context 'with valid attributes' do
+            it 'sucessfully transaction' do
+                account = create(:account, balance: 100)
+                destination_account = create(:account, balance: 100)
+                
+                post :transfer,
+                       params: {
+                        account_number: account.account_number,
+                        destination_account_number: destination_account.account_number,
+                        amount: 10
+                       }
+
+                expect(response.status).to eq(200)
+                expect(JSON.parse(response.body)['message']).to eq('Successfully transaction!')
+                expect(account.reload.balance).to eq(90)
+            end
+        end
+    end
+
     describe 'GET /api/v1/accounts/balance' do
         context 'with valid attributes' do
             it 'show the balance' do

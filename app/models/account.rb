@@ -6,12 +6,7 @@ class Account < ApplicationRecord
         puts "Transfering #{amount} from account #{account.id} to account #{destination_account.id}"
         account.balance -= amount
         destination_account.balance += amount
-        destination_account.save
-        account.save
-    end
+        account.save!
 
-    def self.balance
-        
     end
-    
 end

@@ -7,15 +7,14 @@ module Api
             end
 
             def transfer
-                @account = Account.find(params[:id])
-                
+                account = Account.find_by!(params[:account_number])
             
-                destination_account_param = params.permit(:destination_account_id)
-                @destination_account = Account.find(destination_account_param[:destination_account_id])
-                return head :not_found unless @destination_account
+                destination_account_param = params.permit(:destination_account_number)
+                destination_account = Account.find_by!(destination_account_param[:destination_account_number])
+                return head :not_found unless destination_account
             
-                return head :unprocessable_entity unless Account.transfer(@account, @destination_account, amount)
-                render json: {transfered: true}
+                return head :unprocessable_entity unless Account.transfer(account, destination_account, amount)
+                render json: {transfered: true, message: 'Successfully transaction!'}
             end
 
             def balance

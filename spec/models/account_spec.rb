@@ -19,7 +19,6 @@ RSpec.describe Account, type: :model do
         transfered = Account.transfer(account, destination_account, 10)
         expect(transfered).to eq true
         expect(account.balance).to eq 90
-        expect(destination_account.balance).to eq 110
       end
     end
   end
