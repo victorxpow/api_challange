@@ -1,0 +1,38 @@
+require:
+  - rubocop-rails
+
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  TargetRubyVersion: 2.7.1
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'node_modules/**/*'
+    - 'config/*'
+    - 'config/spring.rb'
+    - 'config/puma.rb'
+    - 'config/initializers/*'
+    - 'config/environments/*'
+    - 'config/application.rb'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+
+Style/Documentation:
+ Enabled: false
+
+Style/FrozenStringLiteralComment:
+ Enabled: false
+
+Metrics/BlockLength:
+ ExcludedMethods: ['describe', 'context', 'feature', 'scenario', 'let']
+
+Layout/LineLength:
+  Max: 120
+
+Style/AsciiComments:
+  Enabled: false

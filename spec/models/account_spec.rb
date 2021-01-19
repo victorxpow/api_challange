@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Account, type: :model do
   let!(:account) { create(:account, balance: 100) }
-  context "validations" do
+  context 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:account_number) }
     it { should validate_presence_of(:balance) }
@@ -11,7 +11,7 @@ RSpec.describe Account, type: :model do
   end
 
   describe '#transfer' do
-    let(:destination_account_params) { attributes_for(:account)}
+    let(:destination_account_params) { attributes_for(:account) }
     let!(:destination_account) { create(:account, destination_account_params) }
 
     context 'with valid params' do
@@ -21,7 +21,7 @@ RSpec.describe Account, type: :model do
         expect(account.balance).to eq 90
       end
     end
-    
+
     context 'validations' do
       it 'amount must be positive greater than one integer' do
         transfered = Account.transfer(account, destination_account, -10)
@@ -33,6 +33,5 @@ RSpec.describe Account, type: :model do
         expect(transfered).to eq false
       end
     end
-
   end
 end
