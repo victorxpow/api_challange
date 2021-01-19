@@ -2,8 +2,15 @@ module Api
   module V1
     class AccountsController < ApplicationController
       def create
+        existing = Account.find_by(params[:account_number])
+
+        if existing
+          render json:{ message: 'Account number already taken',
+                          account_number: existing.account_number}, status: 409
+        else
         account = Account.create(account_params)
         render json: account, status: :created
+        end
       end
 
       def transfer
@@ -19,9 +26,12 @@ module Api
       end
 
       def balance
-        account = Account.find_by!(params[:account_number])
-
-        render json: account.balance, status: :ok
+        account = Account.find_by(params[:account_number])
+        if account.nil?
+          render json: {message: 'Account doesnt exist'}, status: :not_found
+        else
+          render json: account.balance, status: :ok
+        end
       end
 
       private

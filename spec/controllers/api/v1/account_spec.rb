@@ -22,7 +22,22 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
         expect(response.status).to eq(201)
         expect(JSON.parse(response.body)['name']).to eq(name)
         expect(JSON.parse(response.body)['balance']).to eq(balance)
-        expect(JSON.parse(response.body)['account_number'].nil?).to be(false)
+        expect(JSON.parse(response.body)['account_number'].nil?).to eq(false)
+      end
+    end
+
+    context 'when the account number alredy taken' do
+      it 'show the account number and message error' do
+        account = create(:account)
+
+        post :create,
+             params: { account: {
+               account_number: account.account_number
+             } }
+
+        expect(response.status).to eq(409)
+        expect(JSON.parse(response.body)['message']).to eq('Account number already taken')
+        expect(JSON.parse(response.body)['account_number']).to eq(account.account_number)
       end
     end
   end
@@ -54,8 +69,17 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
 
         get :balance, params: { account_number: account.account_number }
 
-        expect(response.status).to be(200)
+        expect(response.status).to eq(200)
         expect(JSON.parse(response.body)).to eq(account.balance)
+      end
+    end
+  
+    context 'when account doesnt exist' do
+      it 'show error message' do
+        get :balance, params: { account_number: 465489 }
+
+        expect(response.status).to eq(404)
+        expect(JSON.parse(response.body)['message']).to eq('Account doesnt exist')
       end
     end
   end
