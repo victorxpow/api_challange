@@ -2,10 +2,8 @@ module Api
     module V1
         class AccountsController < ApplicationController
             def create
-                @account = Account.new(account_params)
-                return redirect_to @account, 
-                                   notice: 'done' if @account.save
-                render json: @account, status: :created
+                account = Account.create(account_params)
+                render json: account, status: :created
             end
 
             def transfer
@@ -19,10 +17,16 @@ module Api
                 return head :unprocessable_entity unless Account.transfer(@account, @destination_account, amount)
                 render json: {transfered: true}
             end
+
+            def balance
+                account = Account.find_by!(params[:account_number])
+        
+                render json: account.balance, status: :ok
+            end
             
             private
             def account_params
-                params.require(:account).permit(:name, :balance, :account_number)
+                params.require(:account).permit(:name, :balance, :account_number, :token)
             end
         
             def amount

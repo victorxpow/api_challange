@@ -9,4 +9,9 @@ class Account < ApplicationRecord
         destination_account.save
         account.save
     end
+
+    def self.balance
+        
+    end
+    
 end
